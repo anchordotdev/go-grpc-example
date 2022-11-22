@@ -1,0 +1,9 @@
+go 1.19
+
+use ./client
+
+use ./pingpong
+
+use ./server
+
+use ./anchor.dev/my-org/my-realm/pki-go

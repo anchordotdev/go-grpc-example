@@ -1,0 +1,23 @@
+services:
+  pong-server:
+    build:
+      dockerfile: server/Dockerfile
+    environment:
+      - ACME_DIRECTORY_URL
+      - ACME_KID=${SERVER_ACME_KID}
+      - ACME_HMAC_KEY=${SERVER_ACME_HMAC_KEY}
+    hostname: 'pong-server'
+    ports:
+      - "4433:4433"
+  ping-client:
+    build:
+      dockerfile: client/Dockerfile
+    depends_on:
+      - pong-server
+    environment:
+      - ACME_DIRECTORY_URL
+      - ACME_KID=${CLIENT_ACME_KID}
+      - ACME_HMAC_KEY=${CLIENT_ACME_HMAC_KEY}
+    hostname: 'ping-client'
+    links:
+      - 'pong-server:pong.my-org.internal'

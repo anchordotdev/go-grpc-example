@@ -1,0 +1,11 @@
+syntax = "proto3";
+package pingpong;
+
+option go_package = "github.com/anchordotdev/labs/pingpong";
+
+message Message {
+  string payload = 1;
+}
+service PingPong {
+  rpc ServePingPong(Message) returns (Message) {}
+}
